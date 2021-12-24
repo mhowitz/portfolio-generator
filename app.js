@@ -1,8 +1,8 @@
 
-// const fs = require('fs');
-// const generatePage = require('./src/page-template.js');
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
 
-// const pageHMTL = generatePage(name, github);
+
 
 const { link, cpSync } = require('fs');
 const inquirer = require('inquirer');
@@ -142,12 +142,12 @@ const promptProject = portfolioData => {
 promptUser()
 .then(promptProject)
 .then(portfolioData => {
-    console.log(portfolioData)
+    const pageHMTL = generatePage(portfolioData);
+    fs.writeFile('./index.html', pageHMTL, err => {
+        if (err) throw err;
+    
+        console.log('Porftolio Complete! Check out index.html to see the output!');
+    })
 });
 
 
-// fs.writeFile('./index.html', generatePage(name, github), err => {
-//     if (err) throw err;
-
-//     console.log('Porftolio Complete! Check out index.html to see the output!');
-// })
